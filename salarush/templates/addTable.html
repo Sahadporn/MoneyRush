@@ -1,0 +1,13 @@
+
+<form action="/add_item/" method="post">
+    {% csrf_token %}
+    <input type="text" name="list">
+    <input type="number" name="amount">
+    <input type="submit" value="add">
+</form>
+{% for element in rush_list %}
+    {{element.list_name}}
+    {{element.money}}
+<br>
+{% endfor %}
+
