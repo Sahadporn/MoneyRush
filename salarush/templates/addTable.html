@@ -3,19 +3,47 @@
     {% csrf_token %}
     <input type="text" name="list">
     <input type="number" name="amount">
-    <input type="submit" value="income">
+    <input type="submit" value="income" name="action">
+    <input type="submit" value="payment" name="action">
 </form>
-<form action="/subtract_item/" method="post">
-    {% csrf_token %}
-    <input type="text" name="list">
-    <input type="number" name="amount">
-    <input type="submit" value="payment">
-</form>
-{% for element in rush_list %}
-    {{element.list_name}}
-    {{element.money}}
-<br>
+<!--<form action="/subtract_item/" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="text" name="list">-->
+<!--    <input type="number" name="amount">-->
+<!--    <input type="submit" value="payment">-->
+<!--</form>-->
+<div>
+    <ul style="list-style-type:none;">
+        <li>
+            <table>
+                 <tr>
+                    <th>List</th>
+                    <th>income</th>
+                     <th>payment</th>
+                 </tr>
+                    {% for element in rush_list %}
+                <tr>
+                     <td>{{element.list_name}}</td>
+                        {% if element.type %}
+                        <td>{{element.money}}</td>
+                        <td>-</td>
+                        {% else %}
+                        <td>-</td>
+                        <td>{{element.money}}</td>
+                        {% endif %}
+                </tr>
+                    {% endfor %}
+            </table>
+        </li>
+    </ul>
+</div>
+
+{% if messages %}
+{% for msg in messages %}
+{{ msg }}
 {% endfor %}
+{% endif %}
+
 <a href="{% url 'salarush:index' %}">
     <button>Back to main page</button>
 </a>
