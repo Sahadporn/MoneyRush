@@ -3,11 +3,21 @@
     {% csrf_token %}
     <input type="text" name="list">
     <input type="number" name="amount">
-    <input type="submit" value="add">
+    <input type="submit" value="income">
+</form>
+<form action="/subtract_item/" method="post">
+    {% csrf_token %}
+    <input type="text" name="list">
+    <input type="number" name="amount">
+    <input type="submit" value="payment">
 </form>
 {% for element in rush_list %}
     {{element.list_name}}
     {{element.money}}
 <br>
 {% endfor %}
+<a href="{% url 'salarush:index' %}">
+    <button>Back to main page</button>
+</a>
+
 

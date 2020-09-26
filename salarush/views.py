@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.urls import reverse
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.views import generic
 
 from .models import RushBook, RushListModel
@@ -16,6 +16,14 @@ def add_item(request):
     m = request.POST['amount']
     book = RushBook.objects.get(id=1)
     book.add_list(m, n, True)
+    return HttpResponseRedirect(reverse('salarush:table', args=(1,)))
+
+
+def subtract_item(request):
+    book = get_object_or_404(RushBook, pk=1)
+    n = request.POST['list']
+    m = request.POST['amount']
+    book.add_list(m, n, False)
     return HttpResponseRedirect(reverse('salarush:table', args=(1,)))
 
 
